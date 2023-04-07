@@ -1,0 +1,128 @@
+REMEMBER
+
+1)Said it's much more useful to learn MUI than tailwind, cuz many of it's functionality (designing a Box comp) 
+so better than using tailwind to make a div look like stuff 
+
+2)In FLexbox, 
+justify-content : space-between (SOO many times used)
+                  flex-start
+align-items : center
+
+3) YOU NEED ICONS => https://mui.com/material-ui/material-icons/
+
+
+
+<------------------------------------------------------------------------------------------------------------------------------->
+
+PROJECT LOGS
+
+1)npm create vite@latest
+named project as client 
+React + Typescript
+npm install
+
+
+2)Redux dev tools chrome extension allows you to 
+SEE the state in Redux Store ( many other state management lib don't have it)
+
+
+3)npm i react-redux @reduxjs/toolkit
+// this is out state management lib with react-redux 
+
+
+4)npm i react-router-dom @mui/material @emotion/react @emotion/styled @mui-icons-material
+@mui/material => gives all mui components
+
+
+5)npm i -D @types/react-dom 
+the -D means that we are installing a dev dependency
+react-dom needs some different `types` so that we can use with Typescript
+
+
+6)npm i -D eslint eslint-config-react-app
+configuring eslint so we'll get shouted at every error we make
+
+
+7)npm i -D @types/node
+
+
+setting up an eslintrc.json as :
+{
+    "extends": "react-app"
+}
+
+
+8)declaring env varibales
+
+
+including in paths in compilerOptions in tsconfig.json
+    "paths" : {
+      "@/*" : ["./src/*"]
+    },  
+so that on renaming the path such that it starts with '@' , if we ctrl+ click that path 
+we'll be able to go to that file (in normal js it was easy but ts needs this to be configed  by us)
+
+
+9)themes.ts in src generates all the themes we'll be using
+generally we don't use just one color, we use many shades of that color i,e 100 - 900.
+there is something called "design tokens" in  the designer space 
+the dude explains everything in themes.ts pretty well
+
+while confuguring mui ui setting in themes.ts : 
+  // mui theme settings
+  export const themeSettings = {
+    palette: {
+      primary: {
+        ...tokens.primary,
+        main: tokens.primary[500],
+        light: tokens.primary[400],
+      },
+
+Notice that he is extending the theme capabilities of mui by 
+using his own token (destructuring into "palette" of mui)
+
+So he needed to config ts again in order to include this 
+
+
+10)Then did App.tsx , created 2 routes - one for home page, another 
+for predicitons page
+
+
+11)Designing file and folder structure
+
+<--------------------index.tsx------------------------->
+
+12)index.tsx in scenes/navbar . tsrafce would fire a ts rafce snippet
+
+13) Because we will create lot of <Box /> that has the contents inside it centers
+    we created a FlexBetween component THAT IS JUST A BOX WITH justify-content : space-between 
+
+14) MUI ICONS ICONS ICONS ICONS ICONS ICON => https://mui.com/material-ui/material-icons/
+    but THERE IS SOME PROBLEM. (solved it by copying the package.json and running npm install) 
+
+15) For normal react (or react-router-dom etc) comp. its' style={{}} and for MUI , its sx={{}} 
+
+<---------------------------------------------------------->
+
+16) Inside App.tsx :
+
+            <Routes>
+              <Route path="/" element={<div>dashboard page</div>} />
+              <Route path="/predictions" element={<div>predictions page</div>} />
+            </Routes>
+    
+    The dummy div is gonna be changed to real thing now. So inside scenes -> we make a dashboard folder ->
+    inside which we create a index.tsx file. Notice that if a file is called index.tsx then on importing:
+
+    `import Navbar from "@/scenes/dashboard";` <==== you don't need to add the extension
+
+17) THE DUDE EXPLAINS Grid : https://grid.malven.co (Learn basics)
+    and the ABSOLUTE MASTERPIECE that is Grid-Template-area : https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas (Learn basics)
+
+    He has divided his dashboard entries as a grid of 10 "things" row-wise and 3 "things" column-wise.
+
+    sx = {{
+        gridTemplateColumns :"repeat(3, minmax(370px, 1fr))" , <====  WE'LL REPEAT COLUMNS 3 times and EACH COLUMN needs minimum 370px
+        gridTemplateRows :"repeat(10, minmax(60px, 1fr))", <==== WE'LL REPEAT ROWS 10 times and EACH ROW needs minimum 60px
+        gridTemplateAreas : gridTemplateLargeScreens
+    }}
