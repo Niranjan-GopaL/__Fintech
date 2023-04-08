@@ -5,7 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-// import kpiRoutes from "./routes/kpi.js";
+import kpiRoutes from "./routes/kpi.js";
 // import productRoutes from "./routes/product.js";
 // import transactionRoutes from "./routes/transaction.js";
 // import KPI from "./models/KPI.js";
@@ -26,10 +26,10 @@ app.use(cors());
 
 console.log("Hello world!");
 
-// /* ROUTES */
-// app.use("/kpi", kpiRoutes);
-// app.use("/product", productRoutes);
-// app.use("/transaction", transactionRoutes);
+/* ROUTES */
+app.use("/kpi", kpiRoutes);
+app.use("/product", productRoutes);
+app.use("/transaction", transactionRoutes);
 
 
 /* MONGOOSE SETUP */

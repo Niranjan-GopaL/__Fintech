@@ -295,4 +295,8 @@ BUT NEW ERROR:  MongoNetworkError: connection 1 to 35.154.42.45:27017 closed did
     NetworkAccess/ (verify the IP you registered is the same than this your actually used). 
     You can select : Add IP address"
 
-<--------------------------------------------------------------------------------------------------->    
+<--------------------------------------PROBLEM SOLVED!!!----------------------------------------------------->    
+
+28) DATA MODELLING => That presentation of how the data is modelled across the app
+
+29)Setting up Routes in index.js
