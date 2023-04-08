@@ -8,9 +8,10 @@ in drop down there might be more than one of the thing we want , SELECT CAREFULL
 */
 
 import { Box, useMediaQuery } from "@mui/material";
-// import Row1 from "./Row1";
-// import Row2 from "./Row2";
-// import Row3 from "./Row3";
+import Row1 from "./Row1";
+import Row3 from "./Row3";
+import Row2 from "./Row2";
+
 
 const gridTemplateLargeScreens = `
   "a b c"
@@ -61,29 +62,33 @@ const gridTemplateSmallScreens = `
 
 
 const Dashboard = () => {
+
+  const isAboveMediumScreens = useMediaQuery("(min-width: 1200px)");
+
   return (
     <Box
     width = '100%'
     height= '100%'
     display= 'grid'
     gap = '1.5rem'
-    sx = {{
-        gridTemplateColumns :"repeat(3, minmax(370px, 1fr))" ,
-        gridTemplateRows :"repeat(10, minmax(60px, 1fr))",
-        gridTemplateAreas : gridTemplateLargeScreens
-    }}
+    sx={
+      isAboveMediumScreens
+        ? {
+            gridTemplateColumns: "repeat(3, minmax(370px, 1fr))",
+            gridTemplateRows: "repeat(10, minmax(60px, 1fr))",
+            gridTemplateAreas: gridTemplateLargeScreens,
+          }
+        : {
+            gridAutoColumns: "1fr",
+            gridAutoRows: "80px",
+            gridTemplateAreas: gridTemplateSmallScreens,
+          }
+    }
     >
         {/* Now we'll declare all the grid elements inside */}
-        <Box bgcolor="#ffffff" gridArea="a"></Box>
-        <Box bgcolor="#ffffff" gridArea="b"></Box>
-        <Box bgcolor="#ffffff" gridArea="c"></Box>
-        <Box bgcolor="#ffffff" gridArea="d"></Box>
-        <Box bgcolor="#ffffff" gridArea="e"></Box>
-        <Box bgcolor="#ffffff" gridArea="f"></Box>
-        <Box bgcolor="#ffffff" gridArea="g"></Box>
-        <Box bgcolor="#ffffff" gridArea="h"></Box>
-        <Box bgcolor="#ffffff" gridArea="i"></Box>
-        <Box bgcolor="#ffffff" gridArea="j"></Box>
+        <Row1 />
+        <Row2 />
+        <Row3 />
     </Box>
 
   )

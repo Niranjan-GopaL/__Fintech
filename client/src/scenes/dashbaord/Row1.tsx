@@ -1,10 +1,14 @@
-import React from 'react'
+import DashboardBox from '@/components/DashboardBox'
 
-type Props = {}
-
-const Row1 = (props: Props) => {
+const Row1 = () => {
   return (
-    <div>Row1</div>
+    // Because entire jsx must be enclosed inside a common element, 
+    // that is why we create these empty tags
+    <>
+      <DashboardBox  gridArea="a"></DashboardBox>
+      <DashboardBox  gridArea="b"></DashboardBox>
+      <DashboardBox  gridArea="c"></DashboardBox>
+    </>
   )
 }
 

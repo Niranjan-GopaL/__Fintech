@@ -1,10 +1,12 @@
-import React from 'react'
+import DashboardBox from '@/components/DashboardBox'
 
-type Props = {}
-
-const Row2 = (props: Props) => {
+const Row2 = () => {
   return (
-    <div>Row2</div>
+    <>
+      <DashboardBox  gridArea="d"></DashboardBox>
+      <DashboardBox  gridArea="e"></DashboardBox>
+      <DashboardBox  gridArea="f"></DashboardBox>
+    </>
   )
 }
 
