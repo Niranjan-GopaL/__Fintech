@@ -122,7 +122,7 @@ for predicitons page
     He has divided his dashboard entries as a grid of 10 "things" row-wise and 3 "things" column-wise.
 
     sx = {{
-        gridTemplateColumns :"repeat(3, minmax(370px, 1fr))" , <====  WE'LL REPEAT COLUMNS 3 times and EACH COLUMN needs minimum 370px
-        gridTemplateRows :"repeat(10, minmax(60px, 1fr))", <==== WE'LL REPEAT ROWS 10 times and EACH ROW needs minimum 60px
+        gridTemplateColumns :"repeat(3, minmax(370px, 1fr))" , <====  WE'LL REPEAT COLUMNS 3 times and EACH COLUMN needs minimum 370px ()
+        gridTemplateRows :"repeat(10, minmax(60px, 1fr))", <==== WE'LL REPEAT ROWS 10 times and EACH ROW needs minimum 60px (vertical units height)
         gridTemplateAreas : gridTemplateLargeScreens
     }}
