@@ -14,9 +14,9 @@ import {
 //  tagTypes: ["Kpis", "Products", "Transactions"] is used TO STORE API DATA
 
 /* endpoints: (build) => ({
-    getKpis : build.query({
-        query : () => "kpi/kpis/",
-        provideTags : ["kpis"]
+    getKpis : build.query({   <--------------API call to import.meta.env.VITE_BASE_UR/kpi/kpis
+        query : () => "kpi/kpis/",           A function will be grabbing the data that the API 
+        provideTags : ["kpis"]               endpoint gives and saving it into kpis inside the Tag
     })
     getProducts : build.query({
         
@@ -35,6 +35,7 @@ export const api = createApi({
     reducerPath: "main",
     tagTypes: ["Kpis", "Products", "Transactions"],
 
+    // Just 3 API CALLS
     endpoints: (build) => ({
         getKpis: build.query<Array<GetKpisResponse>, void>({
         query: () => "kpi/kpis/",
@@ -52,4 +53,6 @@ export const api = createApi({
 
 });
 
+// "prefix of use and suffix of Query" on the api calls is HOW YOU GET THE "HOOKS"
+// see the func name is api and we are exporting this function and it's HOOKS (i think, Learn React LOL)
 export const { useGetKpisQuery, useGetProductsQuery, useGetTransactionsQuery } = api;

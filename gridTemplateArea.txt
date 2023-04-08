@@ -1,5 +1,6 @@
 Copy this snippet wherever you want. This is INSANELY USEFUL
 
+<--------------------------------------------------------------------------------------------------------------------->
     const gridTemplateLargeScreens = `
           "a b c"
           "a b c"
@@ -43,3 +44,37 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+<--------------------------------------------------------------------------------------------------------------------->
+
+
+IF YOU WANT TO MAKE IT MORE RESPONSIVE USE THIS :->>>
+<--------------------------------------------------------------------------------------------------------------------->
+
+ const isAboveMediumScreens = useMediaQuery("(min-width: 1200px)");
+
+  return (
+    <Box
+    width = '100%'
+    height= '100%'
+    display= 'grid'
+    gap = '1.5rem'
+    sx={
+      isAboveMediumScreens
+        ? {
+            gridTemplateColumns: "repeat(3, minmax(370px, 1fr))",
+            gridTemplateRows: "repeat(10, minmax(60px, 1fr))",
+            gridTemplateAreas: gridTemplateLargeScreens,
+          }
+        : {
+            gridAutoColumns: "1fr",   <-------------- THIS IS THE WIDTH OF ONE EACH COLUMN : 1 fractional unit
+            gridAutoRows: "80px",     <-------------- Notice that these are "gridAutoColumns" and not template, they are automatically set for us
+            gridTemplateAreas: gridTemplateSmallScreens,                      
+          }
+    }
+    >
+    {/*ENTER THE ELEMENTS HERE*/}
+
+
+
+    </ Box>
+  )

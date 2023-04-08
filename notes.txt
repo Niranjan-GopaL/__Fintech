@@ -10,9 +10,22 @@ align-items : center
 
 3) YOU NEED ICONS => https://mui.com/material-ui/material-icons/
 
+4) Ctrl + Alt + UP / DOWN => multiple cursor up or DOWN
+
+5) (JUST BACKSPACE ON div the both opening and closing tag will automatically be removed)
+      <> <---------------------------- empty wrapper
+        <DashboardBox  gridArea="a"></DashboardBox>
+        <DashboardBox  gridArea="b"></DashboardBox>
+        <DashboardBox  gridArea="c"></DashboardBox>
+      </>
+
+6) for AUTO IMPORTING USING INTELLISENSE :
+  ( just BACKSPACE few letter on DashboardBo and wait for the drop down to come ):
+
+  import DashboardBox from '@/components/DashboardBox'
 
 
-<------------------------------------------------------------------------------------------------------------------------------->
+<-------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 PROJECT LOGS
 
@@ -90,6 +103,8 @@ for predicitons page
 
 11)Designing file and folder structure
 
+
+
 <--------------------index.tsx------------------------->
 
 12)index.tsx in scenes/navbar . tsrafce would fire a ts rafce snippet
@@ -104,6 +119,8 @@ for predicitons page
 
 <---------------------------------------------------------->
 
+
+
 16) Inside App.tsx :
 
             <Routes>
@@ -116,6 +133,10 @@ for predicitons page
 
     `import Navbar from "@/scenes/dashboard";` <==== you don't need to add the extension
 
+
+
+<------------------------------index.tsx in scene/Dashboard---------------------------->
+
 17) THE DUDE EXPLAINS Grid : https://grid.malven.co (Learn basics)
     and the ABSOLUTE MASTERPIECE that is Grid-Template-area : https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas (Learn basics)
 
@@ -126,3 +147,120 @@ for predicitons page
         gridTemplateRows :"repeat(10, minmax(60px, 1fr))", <==== WE'LL REPEAT ROWS 10 times and EACH ROW needs minimum 60px (vertical units height)
         gridTemplateAreas : gridTemplateLargeScreens
     }}
+
+    const isAboveMediumScreens = useMediaQuery("(min-width: 1200px)"); <=== A BUILT IN HOOK THAT MUI HAS,
+                                                                            Returns a boolean wheather screen width is more than 1200 px
+
+18) So now we made each of the DashboardBox appear RESPONSIVELY. Now since each Box in the Dashboard is same 
+    we make it as a component.
+
+    In component/DashboardBox.tsx is made (styling for A BOX in dashboard)                                                                 
+
+<-------------------------------------------------------------------->
+
+
+
+
+<--------------------------------Creating Rows for dealing with DashboardBox in each row------------------------------------>
+
+19) It'll be too tedious to code out the functionality of the induvidual DashboardBox
+    So we divide entire thing into 3 Rows => 1 + 1 + 1
+                                             1 + 1 + 1
+                                             1 + 1 + 2
+      <Box .....props for styling.....>
+        {/* Now we'll declare all the grid elements inside */}
+        <DashboardBox  gridArea="a"></DashboardBox>
+        <DashboardBox  gridArea="b"></DashboardBox>
+        <DashboardBox  gridArea="c"></DashboardBox>
+        <DashboardBox  gridArea="d"></DashboardBox>
+        <DashboardBox  gridArea="e"></DashboardBox>
+        <DashboardBox  gridArea="f"></DashboardBox>
+        <DashboardBox  gridArea="g"></DashboardBox>
+        <DashboardBox  gridArea="h"></DashboardBox>
+        <DashboardBox  gridArea="i"></DashboardBox>
+        <DashboardBox  gridArea="j"></DashboardBox>
+    </Box>
+
+in Row1.tsx :
+
+////////////////////////////////////////////////IMPORTANT SHORTCUT NO.1 ---->
+tsrafce and copy paste inside the wrapper div: (JUST BACKSPACE ON div the both opening and closing tag will automatically be removed)
+      <>
+        <DashboardBox  gridArea="a"></DashboardBox>
+        <DashboardBox  gridArea="b"></DashboardBox>
+        <DashboardBox  gridArea="c"></DashboardBox>
+      </>
+and similarly in the other two
+
+
+////////////////////////////////////////////////IMPORTANT SHORTCUT NO.2 ---->
+for AUTO IMPORTING USING INTELLISENSE :
+  ( just BACKSPACE few letter on DashboardBo and wait for the drop down to come )
+import DashboardBox from '@/components/DashboardBox'
+
+
+////////////////////////////////////////////////IMPORTANT SHORTCUT NO.3 ---->
+ Ctrl + Alt + UP / DOWN => multiple cursor up or DOWN
+<-------------------------------------------------------------------->
+
+
+
+ENTER TYPESCRIPT and REDUX TOOLKIT (State management library)
+HEAVY BACKEND STUFF STARTS NOW
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+<-----------------------------state/api.ts--------------------------------------->
+
+Till now we did not touch TS because we were doing the layout , Now we'll deal with data 
+and from here on Typescript becomes really useful
+
+20) doing API CALLS and getting the data , exporting hooks in api.ts
+
+21) setting up STORES AND PROVIDERS FOR REDUX in main.tsx
+
+22) setting up the Backend :
+      creating server folder --> npm init -y (initialises npm packages for us)
+
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+SHORTCUT==============-----------===========>
+23) npm i express body-parser cors dotenv helmet morgan mongoose mongoose-currency 
+
+express -> framework for Node js to handle API
+body-parser -> handle information coming from the body of the request
+cors -> Cross Origin Resource Sharing (So you can call from a different URL)
+dotenv -> in order to handle env variables
+helmet -> API endpoint Security
+morgan -> console loggin information every time we hit an endpoint 
+mongoose -> an ORM used for MongoDB
+mongoose-currency -> in order to deal with values that are monetary ,i.e currency
+
+24) npm i -D nodemon (installing dev dependencies)
+
+nodemon -> so that you dont have to restart the server every time you make any change
+
+25) Create  a index.js inside server and begin importing stuff 
+    BUT TO IMPORT STUFF IN JS , INSIDE package.json YOU NEED TO ADD THIS SOMEWHERE:
+
+    "type" : "module"   (-both singular word , -if you are adding it in the end, no need of comma
+                          for some reason, in json you can't do that , at the end just-in-case)
+
+    inside scripts :
+    "dev" : "nodemon index.js" (by npm run dev , now you can have nodemon run the server via index.js)
+
+Write a console command of Hello World and run the server (npm run dev) to see if everything is fine
+
+26) So now you need to go to MongoDB and set up an acc. 
