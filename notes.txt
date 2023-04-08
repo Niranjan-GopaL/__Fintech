@@ -263,4 +263,36 @@ nodemon -> so that you dont have to restart the server every time you make any c
 
 Write a console command of Hello World and run the server (npm run dev) to see if everything is fine
 
-26) So now you need to go to MongoDB and set up an acc. 
+26) So now you need to go to MongoDB and set up an acc.
+    In your Dashboard in MongoDB -> Click connect on the CLuster -> Connect your application
+    -> Copy the URL and paste it in (newly created .env file)
+
+    ALso keep a PORT = <whatever port you gave in .env of client where vite will fire the React app>
+
+<-------------------------------------PROBLEM CONNECTING TO SERVER--------------------------->
+
+27) Error: Invalid mongodb uri (Eventhough everything was correct)
+    SOLUTION : https://www.npmjs.com/package/npm-check-updates seems like one of the dependencies
+    were not UPDATED TO LATEST VERSION (HERE mongoose)
+
+    => ncu -g (npm-check-updates all the dependencies globally)
+    => ncu mongoose (After that the error was gone)
+
+BUT ANOTHER ERROR : Error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.jd3uha7.mongodb.net did not connect
+  SOLUTION : I had to get the MONGO_URL for node verison 2.20 and later 
+  https://www.mongodb.com/community/forums/t/querysrv-econnrefused/99869 
+  
+BUT NEW ERROR:  MongoNetworkError: connection 1 to 35.154.42.45:27017 closed did not connect
+    SOLUTION :  In Sidebar of Dashboard-> Network Access -> Adding 0.0.0.0/0 to the whitelisted IP
+    
+    => npm run dev and VOILA 
+
+    BUT READ THIS => https://stackoverflow.com/questions/60431996/mongooseerror-mongooseserverselectionerror-connection-monitor-to-52-6-250-2
+
+   " On your MongoDB account, check the IP you choose to connect your application.
+    If you start working on a initial IP and try to work using another IP address it won't work.
+    In mongoDB:
+    NetworkAccess/ (verify the IP you registered is the same than this your actually used). 
+    You can select : Add IP address"
+
+<--------------------------------------------------------------------------------------------------->    

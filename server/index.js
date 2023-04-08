@@ -32,20 +32,14 @@ console.log("Hello world!");
 // app.use("/transaction", transactionRoutes);
 
 
-// /* MONGOOSE SETUP */
-// const PORT = process.env.PORT || 9000;
-// mongoose
-//   .connect(process.env.MONGO_URL, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(async () => {
-//     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
-
-//     /* ADD DATA ONE TIME ONLY OR AS NEEDED */
-//     // await mongoose.connection.db.dropDatabase();
-//     // KPI.insertMany(kpis);
-//     // Product.insertMany(products);
-//     // Transaction.insertMany(transactions);
-//   })
-//   .catch((error) => console.log(`${error} did not connect`));
+/* MONGOOSE SETUP */
+const PORT = process.env.PORT || 9000; //back up port just in case
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(async () => {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+  })
+  .catch((error) => console.log(`${error} did not connect`));
