@@ -299,4 +299,106 @@ BUT NEW ERROR:  MongoNetworkError: connection 1 to 35.154.42.45:27017 closed did
 
 28) DATA MODELLING => That presentation of how the data is modelled across the app
 
-29)Setting up Routes in index.js
+29)Setting up Routes in index.js and creating routes/kpi.js
+
+
+So in index.js -------------------------------------------------------------------------
+
+import kpiRoutes from "./routes/kpi.js"; <-\
+app.use("/kpi", kpiRoutes);<---------------/ We created ENTRY POINT FOR A ROUTE (exported from ./route/kpi.js )         
+
+
+In kpi.js --------------------------------------------------------------------------------
+
+// WE SET UP A ROUTE , in it's most basic form it is just this
+
+import express
+const router = express.Router();  <--------- A ROUTER !!!!
+
+/* https://expressjs.com/en/guide/routing.html */
+
+export default router;
+
+THE BODY =>
+
+router.get("/kpis", async (req, res) => {
+  try {
+    const kpis = await KPI.find(); <---------- WAITING TO GET KPI FROM our !!!DATABASE!!!<----. 
+    res.status(200).json(kpis);                                                               |
+  } catch (error) {                                                                           |
+    res.status(404).json({ message: error.message });<---- Handling basic errors              |
+  }                                                                                           |
+});                                                                                           |
+                                                                                              |
+In order to get data from our MongoDB DATABASE , we use mongoose --> (ORM Object Document MAPPING)
+{FYI:-  there are ORM Object Relational Mapping, which is the ODM equivalent for NOSQL DB } 
+
+30)Setting up the model (DB Model : logical structure of a database)
+
+The database schema is the structure of a database described in a formal language 
+supported by the DBMS.
+
+BOILERPLATE (Before build a schema just write this, almost same)------------------
+
+import mongoose from "mongoose";
+const Schema = mongoose.Schema;
+
+const KPISchema = new Schema(
+<BODY>
+);
+
+const KPI = mongoose.model("KPI",KPISchema);
+export default KPI;
+
+
+BODY--------------------------------------------------------------------------------
+
+START READING FROM KPISchema (EVERYTHING IS COMMENTED THERE)
+
+const KPISchema = new Schema(
+  {
+    totalProfit: {
+      type: mongoose.Types.Currency,<------------------- mongoose currency allows us to do this 
+      currency: "USD",
+      get: (v) => v / 100,<----------------------------- mongoose for some reason multiplies val by 100 , so you need to divide it ? ( wierd , Read Doc and see what's up)
+    },
+    totalRevenue : {
+
+    }
+  }
+)
+
+31) If you check the data.js file , you'll understand that the data in it is 
+    just like we made in our Schema
+
+32) inside mongoDB connection in index.js
+
+   // await mongoose.connect.db.dropDatabase();// <------------- Dropping any database that already exists (kinda like a CLEAR SCREEN)
+    // KPI.insertMany(kpis);                    // <------------- Inserting kpis we exported from dummy data
+
+Now the data is given to db in MongoDB you can see it in the dashboard
+Database -> Cluster _ -> View Collection -> Tada!
+
+33) In Frontend scene/dashboard/Row1.tsx 
+
+(TURBO CONSOLE LOG => NEW EXTENSION !! 
+ctrl + alt + L on the "thing" you wanna console log)
+
+export const api = createApi({
+    baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }), //<--- URL TO which we make the API call
+    reducerPath: "main",
+    tagTypes: ["Kpis"],
+    // Just 3 API CALLS
+    endpoints: (build) => ({
+        getKpis: build.query <void, void> ({
+        query: () => "kpi/kpis/",
+        providesTags: ["Kpis"],
+        }), 
+    }),
+
+});
+export const { useGetKpisQuery } = api;
+
+<---------------------------------------- PROBLEMS ----------------------------------------------------------
+34)  PROBLEM 1:  For some reason , the API CALL IS NOT MADE (HENCE THE UNDEFINED , and no call in networks)
+     PROBLEM 2:  Is it something to do with the fact that our MONGO_URL was created from node ^2.2 

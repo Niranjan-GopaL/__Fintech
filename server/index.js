@@ -5,13 +5,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import kpiRoutes from "./routes/kpi.js";
-// import productRoutes from "./routes/product.js";
-// import transactionRoutes from "./routes/transaction.js";
-// import KPI from "./models/KPI.js";
-// import Product from "./models/Product.js";
-// import Transaction from "./models/Transaction.js";
-// import { kpis, products, transactions } from "./data/data.js";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -24,12 +17,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
+
+
+// In case we wanted to seperate the routes
+import kpiRoutes from "./routes/kpi.js";
+import KPI from "./models/KPI.js";
+import { kpis, products, transactions } from "./data/data.js"; // <-- grabbing the data in dummy data 
+// import productRoutes from "./routes/product.js";
+// import transactionRoutes from "./routes/transaction.js";
+// import Product from "./models/Product.js";
+// import Transaction from "./models/Transaction.js";
+
 console.log("Hello world!");
 
 /* ROUTES */
-app.use("/kpi", kpiRoutes);
-app.use("/product", productRoutes);
-app.use("/transaction", transactionRoutes);
+app.use("/kpi", kpiRoutes); // <----------- Entry point for our kpi routes (import kpiRoutes from "./routes/kpi.js";)
+// app.use("/product", productRoutes);
+// app.use("/transaction", transactionRoutes);
 
 
 /* MONGOOSE SETUP */
@@ -41,5 +45,9 @@ mongoose
   })
   .then(async () => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+
+    /* ADD DATA WHENEVER NECESSARY */
+    // await mongoose.connect.db.dropDatabase();// <------------- Dropping any database that already exists (kinda like a CLEAR SCREEN)
+    // KPI.insertMany(kpis);                    // <------------- Inserting kpis we exported from dummy data
   })
   .catch((error) => console.log(`${error} did not connect`));

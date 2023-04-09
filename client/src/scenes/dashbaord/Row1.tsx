@@ -1,6 +1,9 @@
 import DashboardBox from '@/components/DashboardBox'
+import { useGetKpisQuery } from '@/state/api'
 
 const Row1 = () => {
+  const {data} = useGetKpisQuery();
+  console.log(data);
   return (
     // Because entire jsx must be enclosed inside a common element, 
     // that is why we create these empty tags

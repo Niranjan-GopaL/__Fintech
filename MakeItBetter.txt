@@ -1,0 +1,7 @@
+BEST IDEA
+STEP 1) Use https://www.mockaroo.com or some other dummy data generator
+STEP 2) Have a yml file to automatically call the above site and UPDATE THE GRAPHS EVERY DAYS
+
+IDEA 2
+in all dummydata.js files , replace $ with Rupee sign and 
+Check for mongoose-currency how make Rupee as a type
