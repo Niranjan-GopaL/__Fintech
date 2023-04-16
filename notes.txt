@@ -24,7 +24,9 @@ align-items : center
 
   import DashboardBox from '@/components/DashboardBox'
 
-
+7) You need to learn stuff from reading the DOCS <-------- MAKE IT A SKILL
+   learning Recharts is better for a beginner. You can learn Nivo charts also. Both of theor Documentation are good
+   But Recharts is much more accessible for beginner.
 <-------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 PROJECT LOGS
@@ -399,6 +401,16 @@ export const api = createApi({
 });
 export const { useGetKpisQuery } = api;
 
+
 <---------------------------------------- PROBLEMS ----------------------------------------------------------
 34)  PROBLEM 1:  For some reason , the API CALL IS NOT MADE (HENCE THE UNDEFINED , and no call in networks)
      PROBLEM 2:  Is it something to do with the fact that our MONGO_URL was created from node ^2.2 
+---> NOT YET SOLVED
+
+
+35)  Go to Recharts documentation and cut and copy code for Line charts
+
+            npm i recharts (lol you need to install recharts first)
+
+36)  Made BoxHeader.tsx 
+    Using Recharts to display our data

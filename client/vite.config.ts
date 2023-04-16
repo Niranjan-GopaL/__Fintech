@@ -8,6 +8,9 @@ export default defineConfig({
   resolve: {
     alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
   },
+  server:{
+    open: true,
+  }
 });
 
 // trying to make it more easier to understand the import commands
